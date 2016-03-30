@@ -9,7 +9,8 @@
 			'default_random_delay': '0',
 			'default_one_instance': False,
 			'default_comment': '',
-			'default_log': '/var/log/cron.log'
+			'default_log': '/var/log/cron.log',
+			'default_enabled': True
     },
 
     'Ubuntu-14.04': {
@@ -21,7 +22,8 @@
 			'default_random_delay': '0',
 			'default_one_instance': False,
 			'default_comment': '',
-			'default_log': '/var/log/cron.log'
+			'default_log': '/var/log/cron.log',
+			'default_enabled': True
     },
 
     'Unknown': {
@@ -33,7 +35,8 @@
 			'default_random_delay': '0',
 			'default_one_instance': False,
 			'default_comment': '',
-			'default_log': '/var/log/cron.log'
+			'default_log': '/var/log/cron.log',
+			'default_enabled': True
     }
 
 }, grain='osfinger', merge=salt['pillar.get']('cron',{}), default='Unknown') %}
