@@ -10,11 +10,16 @@
 {% set one_instance = job_config.get('one_instance', cron_defaults.default_one_instance) %}
 {% set comment = job_config.get('comment', cron_defaults.default_comment) %}
 {% set log = job_config.get('log', cron_defaults.default_log) %}
-{% set enabled = job_config.get('enabled', cron_defaults.default_enabled) %}
+{% set disabled = job_config.get('disabled', cron_defaults.default_disabled) %}
 {% set cmd =  "" %}
 {% if one_instance %}{% set cmd = cmd  +  " /usr/bin/python /srv/salt-formulas/_modules/asg.py && " %}{% endif %}
 {% set cmd = cmd +  " " + name + " " + " >> " + log + " 2>&1 " %}
-{% if enabled %}
+{% if disabled %}
+cron_job_{{job_id}}:
+  cron.absent:
+    - identifier: '{{ job_id }}'
+    - user: '{{ user }}'
+{% else %}
 cron_job_{{job_id}}:
   cron.present:
     - identifier: '{{ job_id }}'
@@ -28,11 +33,5 @@ cron_job_{{job_id}}:
     - one_instance: '{{ one_instance }}'
     - comment: '{{ comment }}'
     - log: '{{ log }}'
-{% else %}
-cron_job_{{job_id}}:
-  cron.absent:
-    - identifier: '{{ job_id }}'
-    - user: '{{ user }}'
 {% endif %}
-
 {% endfor %}
