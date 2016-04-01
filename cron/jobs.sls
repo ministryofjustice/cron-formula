@@ -1,8 +1,8 @@
 {% from "cron/map.jinja" import cron_defaults with context %}
 {% for job_id, job_config in pillar.get('cron',{}).get('jobs',{}).iteritems() %}
 {% set name = job_config.get('name') %}
-{% set minute = job_config.get('minutes', cron_defaults.default_minute) %}
-{% set hour = job_config.get('hours', cron_defaults.default_hour) %}
+{% set minute = job_config.get('minute', cron_defaults.default_minute) %}
+{% set hour = job_config.get('hour', cron_defaults.default_hour) %}
 {% set dayweek = job_config.get('dayweek', cron_defaults.default_dayweek) %}
 {% set daymonth = job_config.get('daymonth', cron_defaults.default_daymonth) %}
 {% set user = job_config.get('user', cron_defaults.default_user) %}

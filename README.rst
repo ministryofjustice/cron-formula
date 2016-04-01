@@ -12,8 +12,8 @@ Pillar example
       jobs:                                  # A dictionary of cron jobs
          job1:                               # the job id
             name: helloworld                 # the command to be run
-            disabled: False                   # (optional) True to disable the job, default is False
-            minutes: 1                       # (optional) The information to be set into the minute section. Default is */30
+            disabled: False                  # (optional) True to disable the job, default is False
+            minute: 1                        # (optional) The information to be set into the minute section. Default is */30
             hour: 2                          # (optional) The information to be set in the hour section. Default is *
             dayweek: 3                       # (optional) The information to be set in the day of week section. Default is *
             daymonth:                        # (optional) The information to be set in the day of month section. Default is *
