@@ -12,6 +12,7 @@
 {% set log = job_config.get('log', cron_defaults.default_log) %}
 {% set disabled = job_config.get('disabled', cron_defaults.default_disabled) %}
 {% set cmd =  "" %}
+{% if random_delay %}{% set cmd = cmd  +  " echo $(date -u) INFO: Entering random sleep phase... >> " + log + " 2>&1 && sleep $(expr $RANDOM % " ~ random_delay + ") && " %}{% endif %}
 {% if one_instance %}{% set cmd = cmd  +  " /usr/bin/python /srv/salt-formulas/_modules/asg.py && " %}{% endif %}
 {% set cmd = cmd +  " " + name + " " + " >> " + log + " 2>&1 " %}
 {% if disabled %}
@@ -29,9 +30,6 @@ cron_job_{{job_id}}:
     - dayweek: '{{ dayweek }}'
     - daymonth: '{{ daymonth }}'
     - user: '{{ user }}'
-    - random_delay: '{{ random_delay }}'
-    - one_instance: '{{ one_instance }}'
     - comment: '{{ comment }}'
-    - log: '{{ log }}'
 {% endif %}
 {% endfor %}
