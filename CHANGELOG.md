@@ -1,3 +1,10 @@
+## UNRELEASED
+
+* Fix random delay string conversion check
+* Change random delay shell to bash as cron runs with /bin/sh and they are not
+* Make random delay command link a `;` as with `&&` may prevent the job from
+  running if sleep with bad input (or for any reason) fails.
+
 ## v0.0.1
 
 * Fix random delay to not run sleep when value is 0
