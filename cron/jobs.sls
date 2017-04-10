@@ -14,7 +14,7 @@
 {% set cmd =  "" %}
 {% if random_delay|string != '0' %}{% set cmd = cmd  +  " echo $(date -u) INFO: Entering random sleep phase... >> " + log + " 2>&1 && /bin/bash -c \"sleep \$(expr \$RANDOM \% " ~ random_delay + ") \"; " %}{% endif %}
 {% if one_instance %}{% set cmd = cmd  +  " /usr/bin/python /srv/salt-formulas/_modules/asg.py && " %}{% endif %}
-{% set cmd = cmd +  " " + name + " " + " >> " + log + " 2>&1 " %}
+{% set cmd = cmd +  " " + name + " " + "2>&1 | tee -a " + log %}
 {% if disabled %}
 cron_job_{{job_id}}:
   cron.absent:
